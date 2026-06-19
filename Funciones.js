@@ -1,25 +1,74 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // Menú responsive
   const menuToggle = document.getElementById("menuToggle");
   const menu = document.getElementById("menu");
   const menuLinks = document.querySelectorAll(".menu a");
+  const revealElements = document.querySelectorAll(".reveal");
+
+  let menuHistoryActive = false;
+
+  function openMenu() {
+    if (!menu || !menuToggle) return;
+
+    menu.classList.add("open");
+    menuToggle.classList.add("open");
+    document.body.classList.add("menu-open");
+
+    if (!menuHistoryActive) {
+      history.pushState({ menuOpen: true }, "");
+      menuHistoryActive = true;
+    }
+  }
+
+  function closeMenu(fromBackButton = false) {
+    if (!menu || !menuToggle) return;
+
+    menu.classList.remove("open");
+    menuToggle.classList.remove("open");
+    document.body.classList.remove("menu-open");
+
+    if (fromBackButton) {
+      menuHistoryActive = false;
+    }
+  }
+
+  function isMenuOpen() {
+    return menu && menu.classList.contains("open");
+  }
 
   if (menuToggle && menu) {
-    menuToggle.addEventListener("click", () => {
-      menu.classList.toggle("open");
+    menuToggle.addEventListener("click", (event) => {
+      event.stopPropagation();
+
+      if (isMenuOpen()) {
+        closeMenu(false);
+      } else {
+        openMenu();
+      }
     });
   }
 
   menuLinks.forEach((link) => {
     link.addEventListener("click", () => {
-      if (menu) {
-        menu.classList.remove("open");
-      }
+      closeMenu(false);
     });
   });
 
-  // Animaciones al hacer scroll
-  const revealElements = document.querySelectorAll(".reveal");
+  document.addEventListener("click", (event) => {
+    if (!isMenuOpen()) return;
+
+    const clickDentroDelMenu = menu.contains(event.target);
+    const clickEnBoton = menuToggle.contains(event.target);
+
+    if (!clickDentroDelMenu && !clickEnBoton) {
+      closeMenu(false);
+    }
+  });
+
+  window.addEventListener("popstate", () => {
+    if (isMenuOpen()) {
+      closeMenu(true);
+    }
+  });
 
   const observer = new IntersectionObserver(
     (entries) => {
@@ -38,7 +87,6 @@ document.addEventListener("DOMContentLoaded", () => {
     observer.observe(element);
   });
 
-  // Carrusel de fotos del hero
   const carouselSlides = document.querySelectorAll(".carousel-slide");
   const dots = document.querySelectorAll(".dot");
   const prevBtn = document.getElementById("prevBtn");
@@ -103,12 +151,10 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Cambio automático cada 5 segundos
   if (carouselSlides.length > 1) {
     setInterval(nextSlide, 5000);
   }
 
-  // Botón ver más en presentaciones
   const showMoreVenuesBtn = document.getElementById("showMoreVenues");
   const hiddenVenues = document.querySelectorAll(".venue-hidden");
 
