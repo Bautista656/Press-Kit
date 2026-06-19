@@ -670,3 +670,53 @@ a {
     right: 12px;
   }
 }
+
+/* FIX FINAL PARA GITHUB PAGES */
+body {
+  background:
+    radial-gradient(circle at top left, rgba(157, 78, 221, 0.12), transparent 35%),
+    radial-gradient(circle at top right, rgba(255, 45, 85, 0.10), transparent 28%),
+    #07070b !important;
+  color: #f3f3f7 !important;
+}
+
+.header {
+  background: rgba(7, 7, 11, 0.88) !important;
+}
+
+.logo,
+.menu a,
+.hero h1,
+.hero-location,
+.section-heading h2,
+.contact-item p,
+.contact-item a {
+  color: #f3f3f7 !important;
+}
+
+.hero-genres,
+.card p,
+.footer p,
+.venue-card small {
+  color: #b4b4c3 !important;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #9d4edd, #ff2d55) !important;
+  color: #ffffff !important;
+}
+
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.04) !important;
+  color: #f3f3f7 !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+.card,
+.venue-card,
+.track-card,
+.social-item,
+.contact-card {
+  background: rgba(18, 18, 28, 0.88) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
