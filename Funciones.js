@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 const menuToggle = document.getElementById("menuToggle");
 const menu = document.getElementById("menu");
 const menuLinks = document.querySelectorAll(".menu a");
@@ -97,36 +97,3 @@ if (showMoreVenuesBtn) {
     showMoreVenuesBtn.style.display = "none";
   });
 }
-=======
-const menuToggle = document.getElementById("menuToggle");
-const menu = document.getElementById("menu");
-const menuLinks = document.querySelectorAll(".menu a");
-const revealElements = document.querySelectorAll(".reveal");
-
-menuToggle.addEventListener("click", () => {
-  menu.classList.toggle("open");
-});
-
-menuLinks.forEach((link) => {
-  link.addEventListener("click", () => {
-    menu.classList.remove("open");
-  });
-});
-
-const observer = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("visible");
-      }
-    });
-  },
-  {
-    threshold: 0.15,
-  }
-);
-
-revealElements.forEach((element) => {
-  observer.observe(element);
-});
->>>>>>> e4a383e0a44233d59597451cc5b97b070ddc454b
